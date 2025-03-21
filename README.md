@@ -2,11 +2,11 @@
 
 ### Introdução
 
-O cálculo de integrais, especialmente em dimensões altas, pode ser extremamente difícil e demorado usando métodos tradicionais. O **Método de Monte Carlo** é uma abordagem poderosa que usa **amostragem aleatória** para estimar integrais de funções complexas. Este método pode ser ainda mais eficiente quando combinado com **execução paralela** utilizando **threads** para acelerar o processo de cálculo.
+O cálculo de integrais, especialmente em dimensões altas, pode ser extremamente difícil e demorado usando métodos tradicionais. O **Método de Monte Carlo** é uma abordagem poderosa que utiliza **amostragem aleatória** para estimar integrais de funções complexas. Este método pode ser ainda mais eficiente quando combinado com **execução paralela** utilizando **threads** para acelerar o processo de cálculo.
 
 ### O Problema
 
-Desejamos calcular a seguinte integral definida:
+Deseja-se calcular a seguinte integral definida:
 
 $$
 I = \int_{0}^{1} \int_{0}^{1} \dots \int_{0}^{1} e^{-\sum_{i=1}^n x_i^2} \,dx_1 dx_2 \dots dx_n
@@ -18,16 +18,15 @@ $$
 f(x) = e^{-\sum_{i=1}^n x_i^2}
 $$
 
-E estamos integrando no domínio $[0,1]^n$, que é um **hipercubo** $n$-dimensional com lados de comprimento 1.
+E a integração ocorre no domínio $[0,1]^n$, que é um **hipercubo** $n$-dimensional com lados de comprimento 1.
 
 ![Hipercubo 3D](hipercubo_3d.png)
-
 
 ### Método de Monte Carlo
 
 O método de Monte Carlo para calcular integrais segue os seguintes passos básicos:
 
-1. **Gerar pontos aleatórios** dentro do domínio de integração. No nosso caso, isso significa gerar valores aleatórios para $x_1, x_2, ..., x_n$ no intervalo $[0, 1]$.
+1. **Gerar pontos aleatórios** dentro do domínio de integração. No caso, isso significa gerar valores aleatórios para $x_1, x_2, ..., x_n$ no intervalo $[0, 1]$.
 2. **Avaliar a função** nesses pontos aleatórios.
 3. **Calcular a média** dos valores da função nos pontos gerados.
 4. Multiplicar essa média pelo **volume do domínio**. No caso do hipercubo  $[0,1]^n$, o volume é 1, pois é um quadrado (ou hipercubo) com comprimento de lado 1 em cada dimensão.
@@ -36,7 +35,7 @@ Assim, a integral é aproximada pela média dos valores da função nas amostras
 
 ### A Fórmula para a Integral de Monte Carlo
 
-Se $f(x)$ for a função a ser integrada em um domínio $D$ (no nosso caso, o hipercubo $[0]^n$), a fórmula do Método de Monte Carlo é:
+Se $f(x)$ for a função a ser integrada em um domínio $D$ (no caso, o hipercubo $[0]^n$), a fórmula do Método de Monte Carlo é:
 
 $$
 I \approx \frac{1}{N} \sum_{i=1}^{N} f(x_i)
@@ -54,7 +53,7 @@ def f(x):
     return sum(-xi**2 for xi in x)
 ```
 
-Aqui, a função $f(x)$ recebe um vetor de variáveis $x = [x_1, x_2, ..., x_n]$ e retorna $-\sum_{i=1}^n x_i^2$. Essa é a forma negativa da função gaussiana que estamos integrando. O sinal negativo é utilizado porque a função foi escrita dessa forma no código original para aproximar a integral de uma função exponencial.
+Aqui, a função $f(x)$ recebe um vetor de variáveis $x = [x_1, x_2, ..., x_n]$ e retorna $-\sum_{i=1}^n x_i^2$. Essa é a forma negativa da função gaussiana que se deseja integrar. O sinal negativo é utilizado porque a função foi escrita dessa forma no código original para aproximar a integral de uma função exponencial.
 
 ### Exemplos de Outras Funções
 
@@ -62,7 +61,7 @@ Aqui estão alguns exemplos de outras funções que poderiam ser usadas no lugar
 
 #### Exemplo 1: Função $f(x) = x_1 + x_2 + \dots + x_n$
 
-Este é um exemplo simples de uma função linear, onde estamos somando as variáveis $x_i$:
+Este é um exemplo simples de uma função linear, onde se soma as variáveis $x_i$:
 
 ```python
 def f(x):
@@ -72,7 +71,7 @@ def f(x):
 
 #### Exemplo 2: Função $f(x) = x_1^2 + x_2^2 + \dots + x_n^2$
 
-Neste caso, estamos somando os quadrados das variáveis $x_i$:
+Neste caso, se soma os quadrados das variáveis $x_i$:
 
 ```python
 def f(x):
@@ -94,7 +93,7 @@ def f(x):
 
 #### Exemplo 4: Função $f(x) = \cos(x_1 + x_2 + \dots + x_n)$
 
-Neste caso, estamos trabalhando com a função cosseno:
+Neste caso, trabalha-se com a função cosseno:
 
 ```python
 import math
@@ -106,7 +105,7 @@ def f(x):
 
 #### Exemplo 5: Função $f(x) = \tan(x_1 + x_2 + \dots + x_n)$
 
-Aqui, estamos considerando a função tangente:
+Aqui, considera-se a função tangente:
 
 ```python
 import math
@@ -118,7 +117,7 @@ def f(x):
 
 #### Exemplo 6: Função $f(x) = e^{-(x_1 + x_2 + \dots + x_n)}$
 
-Agora, estamos trabalhando com uma função exponencial, que pode ser útil em diversos problemas de modelagem e física.
+Neste caso, trabalha-se com uma função exponencial, que pode ser útil em diversos problemas de modelagem e física:
 
 ```python
 import math
@@ -130,7 +129,7 @@ def f(x):
 
 #### Exemplo 7: Função $f(x) = \prod_{i=1}^{n} x_i$
 
-Aqui, estamos considerando o produto das variáveis $x_1, x_2, ..., x_n$.
+Aqui, considera-se o produto das variáveis $x_1, x_2, ..., x_n$:
 
 ```python
 def f(x):
@@ -143,7 +142,7 @@ def f(x):
 
 #### Exemplo 8: Função $f(x) = 1$ (Função Constante)
 
-Se a função $f(x)$ for uma constante, digamos 1, temos:
+Se a função $f(x)$ for uma constante, digamos 1, tem-se:
 
 ```python
 def f(x):
@@ -153,7 +152,7 @@ def f(x):
 
 ### Explicação do Código
 
-Agora, vamos analisar o código passo a passo.
+O código pode ser explicado passo a passo a seguir.
 
 #### Importação das Bibliotecas
 
@@ -164,13 +163,13 @@ import time
 import queue
 ```
 
-- **`threading`**: A biblioteca `threading` é utilizada para criar e gerenciar múltiplas threads. No código, usamos threads para realizar o cálculo da integral em paralelo, dividindo o trabalho entre várias threads e, assim, acelerando a execução do código.
+- **`threading`**: A biblioteca `threading` é utilizada para criar e gerenciar múltiplas threads. As threads são usadas para realizar o cálculo da integral em paralelo, dividindo o trabalho entre várias threads e, assim, acelerando a execução do código.
   
 - **`random`**: A biblioteca `random` é responsável por gerar números aleatórios. Em nosso caso, ela é usada para gerar as coordenadas $x_i$ aleatórias para os pontos de amostragem dentro do intervalo $[0, 1]$.
   
-- **`time`**: A biblioteca `time` é utilizada para medir o tempo de execução do código. No exemplo, utilizamos o `time.time()` para registrar o tempo antes e depois da execução, permitindo calcular o tempo total de execução da integral.
+- **`time`**: A biblioteca `time` é utilizada para medir o tempo de execução do código. O `time.time()` registra o tempo antes e depois da execução, permitindo calcular o tempo total de execução da integral.
   
-- **`queue`**: A biblioteca `queue` é utilizada para gerenciar o armazenamento dos resultados de cada thread. A `queue.Queue()` permite que as threads armazenem seus resultados de forma segura e eficiente, para que possamos agregá-los no final da execução.
+- **`queue`**: A biblioteca `queue` é usada para gerenciar o armazenamento dos resultados de cada thread. A `queue.Queue()` permite que as threads armazenem seus resultados de forma segura e eficiente, para que possam ser agregados no final da execução.
 
 #### Função Principal
 
@@ -188,7 +187,7 @@ def main():
 
 A função `main` é onde a execução do código começa. Os parâmetros principais são definidos:
 
-- **`DIMENSIONS`**: Representa o número de dimensões da integral. No exemplo, estamos trabalhando com 5 dimensões, mas este número pode ser alterado conforme necessário.
+- **`DIMENSIONS`**: Representa o número de dimensões da integral. No exemplo, estão sendo usadas 5 dimensões, mas esse número pode ser alterado conforme necessário.
   
 - **`TOTAL_POINTS`**: O número total de pontos a serem amostrados. Quanto maior o número de pontos, mais precisa será a estimativa da integral.
   
@@ -209,7 +208,7 @@ A função `main` é onde a execução do código começa. Os parâmetros princi
         thread.start()
 ```
 
-Aqui, o código cria as threads. Para cada thread, a função `monte_carlo_integral` é chamada com os parâmetros necessários. Cada thread calcula a integral para uma quantidade de pontos determinada e armazena os resultados na fila.
+As threads são criadas. Para cada thread, a função `monte_carlo_integral` é chamada com os parâmetros necessários. Cada thread calcula a integral para uma quantidade de pontos determinada e armazena os resultados na fila.
 
 #### Sincronização das Threads
 
@@ -218,7 +217,7 @@ Aqui, o código cria as threads. Para cada thread, a função `monte_carlo_integ
         thread.join()
 ```
 
-Após iniciar todas as threads, o código espera até que todas elas finalizem usando o método `join()`. Esse comando garante que a execução do código principal (a função `main`) só continue após todas as threads terminarem.
+Após iniciar todas as threads, o código aguarda até que todas elas finalizem, utilizando o método `join()`. Esse comando garante que a execução do código principal (a função `main`) só continue após todas as threads terminarem.
 
 #### Cálculo da Integral Final
 
@@ -226,7 +225,7 @@ Após iniciar todas as threads, o código espera até que todas elas finalizem u
     integral_estimate = sum(result_queue.get() for _ in range(NUM_THREADS)) / NUM_THREADS
 ```
 
-Aqui, a média dos resultados obtidos por todas as threads é calculada. A função `get()` é utilizada para recuperar os resultados armazenados na fila `result_queue`.
+A média dos resultados obtidos por todas as threads é calculada. A função `get()` é usada para recuperar os resultados armazenados na fila `result_queue`.
 
 #### Exibição dos Resultados
 
@@ -241,4 +240,3 @@ Finalmente, o código exibe a estimativa da integral, bem como o tempo total de 
 ### Conclusão
 
 O **Método de Monte Carlo** paralelizado com threads permite estimar integrais de alta dimensão de forma eficiente. O código pode ser facilmente adaptado para diferentes funções e domínios, basta alterar a função $f(x)$ e ajustar os parâmetros conforme necessário. Quanto maior o número de pontos gerados e o número de threads, mais precisa será a estimativa da integral.
-
