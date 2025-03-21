@@ -242,4 +242,3 @@ Finalmente, o código exibe a estimativa da integral, bem como o tempo total de 
 
 O **Método de Monte Carlo** paralelizado com threads permite estimar integrais de alta dimensão de forma eficiente. O código pode ser facilmente adaptado para diferentes funções e domínios, basta alterar a função $f(x)$ e ajustar os parâmetros conforme necessário. Quanto maior o número de pontos gerados e o número de threads, mais precisa será a estimativa da integral.
 
-```
